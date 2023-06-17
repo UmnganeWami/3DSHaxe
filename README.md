@@ -1,6 +1,5 @@
 # 3dhaxe
-basicly lets you make 3ds games using the haxe programming language!
-
+basicly lets you make 3ds homebrew using the haxe programming language!
 
 # to setup:
 
@@ -10,5 +9,5 @@ install haxe
 
 # to compile
 
-run `haxe build.hxml`  
-then run the build.bat
+run the build.bat  
+(if you want to do a clean build, run cleanbuild.bat, it basicly just deletes the export folder then runs build.bat)
