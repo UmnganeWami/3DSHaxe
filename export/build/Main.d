@@ -1,5 +1,5 @@
-Main.o: C:/Users/altac/Documents/3dhaxe/source/src/Main.cpp \
- C:/Users/altac/Documents/3dhaxe/source/include/Main.h \
+Main.o: C:/Users/altac/Documents/3dhaxe/export/src/Main.cpp \
+ C:/Users/altac/Documents/3dhaxe/export/include/Main.h \
  C:/devkitPro/libctru/include/3ds.h \
  C:/devkitPro/libctru/include/3ds/types.h \
  C:/devkitPro/libctru/include/3ds/result.h \
@@ -84,7 +84,7 @@ Main.o: C:/Users/altac/Documents/3dhaxe/source/src/Main.cpp \
  C:/devkitPro/libctru/include/3ds/font.h \
  C:/devkitPro/libctru/include/3ds/gdbhio_dev.h \
  C:/devkitPro/libctru/include/3ds/3dslink.h
-C:/Users/altac/Documents/3dhaxe/source/include/Main.h:
+C:/Users/altac/Documents/3dhaxe/export/include/Main.h:
 C:/devkitPro/libctru/include/3ds.h:
 C:/devkitPro/libctru/include/3ds/types.h:
 C:/devkitPro/libctru/include/3ds/result.h:

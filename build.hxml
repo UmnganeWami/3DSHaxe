@@ -5,4 +5,4 @@
 --macro Init.init()
 
 -D no-compilation
--D cpp-output=source
+-D cpp-output=export

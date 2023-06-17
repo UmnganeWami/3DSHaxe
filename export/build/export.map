@@ -4048,7 +4048,7 @@ LOAD C:/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/13.1.0/../../../../arm-
 END GROUP
 LOAD C:/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/13.1.0/armv6k/fpu/crtend.o
 LOAD C:/devkitPro/devkitARM/bin/../lib/gcc/arm-none-eabi/13.1.0/armv6k/fpu/crtn.o
-OUTPUT(C:/Users/altac/Documents/3dhaxe/source/source.elf elf32-littlearm)
+OUTPUT(C:/Users/altac/Documents/3dhaxe/export/export.elf elf32-littlearm)
 LOAD linker stubs
 
 .ARM.attributes
