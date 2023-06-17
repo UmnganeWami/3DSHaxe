@@ -1,0 +1,8 @@
+--class-path haxe
+--main Main
+
+-lib reflaxe.cpp
+--macro Init.init()
+
+-D no-compilation
+-D cpp-output=source
