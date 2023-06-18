@@ -2,12 +2,13 @@
 echo Exporting haxe project
 haxe build.hxml
 echo Haxe export done!
+RMDIR "DUMMYOUTFORCOMPILERPLEASEIGNORE" /S /Q
 echo Compiling exported haxe code to 3ds rom!
 if exist export/Makefile (
     echo Makefile found!
 ) else (
     echo Makefile not found, adding it in
-    xcopy "./compstuff" "./export"
+    xcopy /E "./compstuff" "./export" 
 )
 cd export
 make

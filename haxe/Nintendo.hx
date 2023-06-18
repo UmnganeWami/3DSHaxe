@@ -1,11 +1,27 @@
 package;
 
-
-
+import cpp.Pointer;
 
 @:include("stdio.h")
 @:include("stdlib.h")
 @:include("3ds.h")
+//@:include("citro2d.h")
+
+@:native("PrintConsole")
+typedef PrintConsole = {};
+
+/*typedef enum {
+  GFX_TOP = GSP_SCREEN_TOP, ///< Top screen
+  GFX_BOTTOM = GSP_SCREEN_BOTTOM, ///< Bottom screen
+ } gfxScreen_t;*/
+
+enum GfxScreen_t {
+	@:native("GFX_TOP")
+	GFX_TOP;
+	@:native("GFX_BOTTOM")
+	GFX_BOTTOM;
+}
+
 class Nintendo{
     @:native("gfxInitDefault")
     public static function gfxInitDefault():Void{};
@@ -31,4 +47,16 @@ class Nintendo{
 	@:native("gfxExit")
 	public static function gfxExit():Void{};
 
+	/*public static function consoleInit(screen:Int = 1){
+		if(screen == 1){
+			untyped __cpp__("consoleInit(GFX_TOP, NULL)");
+		}else{
+			untyped __cpp__("consoleInit(GFX_BOTTOM, NULL)");
+		}
+	}*/
+	@:native("consoleInit")
+	public static function consoleInit(screen:GfxScreen_t, printconsole:Null<Pointer<PrintConsole>>):Void{};
+
 }
+
+//consoleInit(GFX_BOTTOM, NULL);
