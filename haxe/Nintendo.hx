@@ -3,11 +3,12 @@ package;
 import cxx.Ptr;
 import cxx.num.SizeT;
 import cxx.num.UInt32;
+import cxx.num.UInt8;
 
 //@:include("citro2d.h")
 
 @:native("PrintConsole")
-typedef PrintConsole = {};
+extern typedef PrintConsole = {};
 
 enum GfxScreen_t {
 	@:native("GFX_TOP")
@@ -22,6 +23,21 @@ enum GfxSide_t {
 	@:native("GFX_RIGHT")
 	GFX_RIGHT;
 }
+
+enum FrameBeginEnum {//idk what to call it lol
+	@:native("C3D_FRAME_SYNCDRAW")
+	C3D_FRAME_SYNCDRAW;
+	@:native("C3D_FRAME_NONBLOCK")
+	C3D_FRAME_NONBLOCK;
+}
+/*
+enum
+{
+	C3D_FRAME_SYNCDRAW = BIT(0), // Perform C3D_FrameSync before checking the GPU status
+	C3D_FRAME_NONBLOCK = BIT(1), // Return false instead of waiting if the GPU is busy
+};
+*/
+
 
 //@:native("C2D_RenderTarget")
 //class C2DRenderTarget {}
@@ -91,8 +107,23 @@ class Nintendo{
 	@:native("C2D_TargetClear")
 	public static function C2D_TargetClear(target:Ptr<C3DRenderTarget>, color:UInt32):Void{}; 
 
+	@:native("C3D_FrameBegin")
+	public static function C3D_FrameBegin(flags:FrameBeginEnum):Void{}; 
+
+	@:native("C2D_SceneBegin")
+	public static function C2D_SceneBegin(target:Ptr<C3DRenderTarget>):Void{}; 
+
+	@:native("C2D_DrawRectSolid")
+	public static function C2D_DrawRectSolid(x:Float, y:Float, z:Float, w:Float, h:Float, clr:UInt32):Void{}; 
+
+	@:native("C2D_Flush")
+	public static function C2D_Flush():Void{}; 
+
+	@:native("C3D_FrameEnd")
+	public static function C3D_FrameEnd(flags:UInt8):Void{}; 
+
 }
-//C2D_TargetClear(bot, clear_color);
+//C2D_DrawRectSolid(0, 0, 0, 40, 40, C2D_Color32f(1, 1, 1, 1));
 
 //consoleInit(GFX_BOTTOM, NULL);
 /*
