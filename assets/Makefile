@@ -37,9 +37,12 @@ SOURCES		:=	src
 DATA		:=	data
 INCLUDES	:=	include
 GRAPHICS	:=	gfx
-GFXBUILD	:=	$(BUILD)
-#ROMFS		:=	romfs
-#GFXBUILD	:=	$(ROMFS)/gfx
+#GFXBUILD	:=	$(BUILD)
+ROMFS		:=	romfs
+GFXBUILD	:=	$(ROMFS)/gfx
+APP_TITLE	:= WamiGame
+APP_DESCRIPTION := A wami game
+APP_AUTHOR	:= UmnganeWami
 
 #---------------------------------------------------------------------------------
 # options for code generation

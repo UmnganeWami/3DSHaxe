@@ -7,7 +7,7 @@ if exist export/Makefile (
     echo Makefile found!
 ) else (
     echo Makefile not found, adding it in
-    xcopy /E "./compstuff" "./export" 
+    xcopy /E "./assets" "./export" 
 )
 cd export
 make

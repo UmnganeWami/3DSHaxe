@@ -5,4 +5,5 @@
 --macro Init.init()
 
 -D no-compilation
+-D cxx-no-null-warnings
 -D cpp-output=export
