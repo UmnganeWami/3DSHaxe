@@ -6,4 +6,3 @@
 
 -D no-compilation
 -D cpp-output=export
--cpp DUMMYOUTFORCOMPILERPLEASEIGNORE

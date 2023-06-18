@@ -11,6 +11,6 @@ class Init {
 
 		//HaxeCompiler.OptionalClassCpp = "bn::optional";
 		//HaxeCompiler.OptionalInclude = (["bn_optional.h", true] : Dynamic);
-		HaxeCompiler.OptionalNullCpp = "NULL";
+		HaxeCompiler.OptionalNullCpp = "NULL"; //so it uses NULL instead of doing std:nullopt
 	}
 }

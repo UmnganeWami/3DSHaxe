@@ -1,23 +1,42 @@
 package;
 
+import cxx.num.UInt32;
+import Nintendo.C3DRenderTarget;
+//import Nintendo.C2DRenderTarget;
+import Nintendo.GfxSide_t;
 import Nintendo.GfxScreen_t;
+import cxx.Ptr; //.Pointer;
+
 
 function main(){
     //trace("uwu");
     untyped __include__("3ds.h");
-    untyped __include__("stdio.h");
-    untyped __include__("stdlib.h");
-    untyped __include__("citro2d.h");
+	//@:include("citro3d.h")
+    untyped __include__("citro2d.h"); //
+    untyped __include__("citro3d.h"); //
+
 	Nintendo.gfxInitDefault();
-	Nintendo.consoleInit(GfxScreen_t.GFX_TOP, null);
+	Nintendo.C3D_Init(Nintendo.C3D_DEFAULT_CMDBUF_SIZE);
+	Nintendo.C2D_Init(Nintendo.C2D_DEFAULT_MAX_OBJECTS);
+	Nintendo.C2D_Prepare();
+	Nintendo.consoleInit(GfxScreen_t.GFX_BOTTOM, null);
+
+	//var bottom = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_BOTTOM, GfxSide_t.GFX_LEFT);
+	var bottomptr:Ptr<C3DRenderTarget> = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_BOTTOM, GfxSide_t.GFX_LEFT);
+
+	var clearColor:UInt32 = Nintendo.C2D_Color32f(0,0,0,1);
+	//C3D_RenderTarget* top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
+
     Nintendo.printf("Hello World\n");
+
     while(Nintendo.aptMainLoop()){
-        Nintendo.hidScanInput();
+		Nintendo.C2D_TargetClear(bottomptr, clearColor);
+        /*Nintendo.hidScanInput();
 
         Nintendo.gfxFlushBuffers();
         Nintendo.gfxSwapBuffers();
 
-        Nintendo.gspWaitForVBlank();
+        Nintendo.gspWaitForVBlank();*/
     }
     Nintendo.gfxExit();
 }
