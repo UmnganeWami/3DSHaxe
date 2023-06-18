@@ -1,4 +1,4 @@
-# 3dhaxe
+# 3DSHaxe
 basicly lets you make 3ds homebrew using the haxe programming language!
 
 # to setup:
