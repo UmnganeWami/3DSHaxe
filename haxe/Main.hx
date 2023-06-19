@@ -7,9 +7,7 @@ import Nintendo.C3DRenderTarget;
 import Nintendo.FrameBeginEnum;
 import Nintendo.GfxSide_t;
 import Nintendo.GfxScreen_t;
-import Nintendo.Tex3DS_Texture;
-import Nintendo.C2D_Image;
-import Nintendo.C3D_Tex;
+import Type;
 import cxx.Ptr;
 
 typedef Sprite = {
@@ -32,6 +30,7 @@ var bottomWidth:Float = 400.0;*/
 var height:Float = 240.0; //the height of both screens
 var width:Float = 400.0; //the width of both screens
 //var sprites:Map<Int, String>;
+//= untyped __cpp__("NULL");
 function main(){
     untyped __include__("3ds.h");
     untyped __include__("citro2d.h"); 
@@ -47,15 +46,12 @@ function main(){
 	var topptr:Ptr<C3DRenderTarget> = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_TOP, GfxSide_t.GFX_LEFT);
 	var clearColor:UInt32 = Nintendo.C2D_Color32f(0.0, 0.0, 1.0, 1.0);
 
-	//var sprsheet:C2D_SpriteSheet = Nintendo.C2D_SpriteSheetLoad("romfs:/gfx/sprites.t3x"); //romfs:/gfx/sprites.t3x
-	//untyped __cpp__("if (!sprsheet) svcBreak(USERBREAK_PANIC)");
-	//var sprPtr:Ptr<C2D_Sprite> = null;
-	//THIS CRASHES!
-	//Nintendo.C2D_SpriteFromSheet(sprPtr,sprsheet,1);
-	//var img:C2D_Image = Nintendo.C2D_SpriteSheetGetImage(sprsheet, 1);
-	
-	//THIS ALSO CRASHES!
-	//Nintendo.C2D_SpriteFromImage(sprPtr, img);
+	var sprsheet:C2D_SpriteSheet = Nintendo.C2D_SpriteSheetLoad("romfs:/gfx/test.t3x"); //romfs:/gfx/sprites.t3x
+	var spr:Null<C2D_Sprite> = null;
+	untyped __cpp__("C2D_Sprite spr");
+	//we want to not need the untyped __cpp__ thingy, so we'll have to fix that up later :3
+	var sprPtr:Ptr<C2D_Sprite> = untyped __cpp__("&spr");//= //returnSpritePointer(spr); //untyped __cpp__("&spr");
+	Nintendo.C2D_SpriteFromSheet(sprPtr,sprsheet,0);
 
     while(Nintendo.aptMainLoop()){
 		Nintendo.gspWaitForVBlank();
@@ -64,15 +60,16 @@ function main(){
 		Nintendo.C3D_FrameBegin(FrameBeginEnum.C3D_FRAME_SYNCDRAW);
 		Nintendo.C2D_TargetClear(topptr, clearColor);
 		Nintendo.C2D_SceneBegin(topptr);
-		drawTop(); 
-		//Nintendo.C2D_DrawSprite(sprPtr);
+		//drawTop(); 
+		Nintendo.C2D_DrawSprite(sprPtr);
 		//Nintendo.C2D_Flush();
 		//Nintendo.C3D_FrameEnd(0);
 
 		Nintendo.C3D_FrameBegin(FrameBeginEnum.C3D_FRAME_SYNCDRAW);
 		Nintendo.C2D_TargetClear(bottomptr, clearColor);
 		Nintendo.C3D_FrameDrawOn(bottomptr);
-		drawBottom();
+		//drawBottom();
+		Nintendo.C2D_DrawSprite(sprPtr);
 
 		Nintendo.C2D_Flush();
 		Nintendo.C3D_FrameEnd(0);
@@ -88,11 +85,20 @@ function drawBottom(){
 	Nintendo.C2D_DrawRectSolid(0.0, 0.0, 0.0, width, height, Nintendo.C2D_Color32f(0.0, 1.0, 0.0, 1.0)); 
 }
 
+/*function returnSpritePointer(sprite:C2D_Sprite):Void{
+	var pshr = sprite;
+	untyped __cpp__("C2D_Sprite pshr = sprite");
+	//return untyped __cpp__("&pshr");
+	untyped __cpp__("return &pshr");
+	//return sprite;
+}*/
+
 /*@:include("test_t3x.h")
 class Sprites{
 	@:native("test_t3x")
 	@:noDiscard
 	public static var test_t3x:Dynamic;
 	@:native("test_t3x_size")
+	
 	public static var test_t3x_size:Dynamic;
 }*/

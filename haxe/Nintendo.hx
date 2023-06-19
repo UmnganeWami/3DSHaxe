@@ -3,6 +3,7 @@ package;
 import cxx.Ptr;
 import cxx.num.SizeT;
 import cxx.num.UInt32;
+import cxx.num.UInt16;
 import cxx.num.UInt8;
 
 //@:include("citro2d.h")
@@ -27,6 +28,31 @@ extern class C2D_SpriteSheet {}
 
 @:native("C2D_Sprite")
 extern class C2D_Sprite {}
+
+@:native("Tex3DS_SubTexture")
+extern class Tex3DS_SubTexture {
+	public var width:UInt16;
+	public var height:UInt16;
+	public var left:Float;
+	public var top:Float;
+	public var right:Float;
+	public var bottom:Float;
+	public inline function new(){
+		trace("lol");
+	}
+}
+//Tex3DS_SubTexture
+/*
+typedef struct Tex3DS_SubTexture
+{
+	u16   width;  ///< Sub-texture width (pixels)
+	u16   height; ///< Sub-texture height (pixels)
+	float left;   ///< Left u-coordinate
+	float top;    ///< Top v-coordinate
+	float right;  ///< Right u-coordinate
+	float bottom; ///< Bottom v-coordinate
+} Tex3DS_SubTexture;
+*/
 
 //Tex3DS_Texture
 
@@ -81,43 +107,6 @@ enum C3D_ClearBits {
 	@:native("C3D_CLEAR_ALL")
 	C3D_CLEAR_ALL;
 }
-
-/*
-typedef struct
-{
-	union
-	{
-		void* data;
-		C3D_TexCube* cube;
-	};
-
-	GPU_TEXCOLOR fmt : 4;
-	size_t size : 28;
-
-	union
-	{
-		u32 dim;
-		struct
-		{
-			u16 height;
-			u16 width;
-		};
-	};
-
-	u32 param;
-	u32 border;
-	union
-	{
-		u32 lodParam;
-		struct
-		{
-			u16 lodBias;
-			u8 maxLevel;
-			u8 minLevel;
-		};
-	};
-} C3D_Tex;
-*/
 
 
 //@:native("C2D_RenderTarget")
@@ -241,12 +230,23 @@ class Nintendo{
 	public static function C2D_SpriteSheetCount(sheet:C2D_SpriteSheet):SizeT{return 0;};
 
 	@:native("C2D_SpriteSheetGetImage")
-	public static function C2D_SpriteSheetGetImage(sheet:Null<C2D_SpriteSheet>, index:SizeT):C2D_Image{return null;};
+	public static function C2D_SpriteSheetGetImage(sheet:Null<C2D_SpriteSheet>, index:Int):C2D_Image{return null;};
 
 	@:native("C2D_SpriteSetPos")
 	public static function C2D_SpriteSetPos(sheet:Ptr<C2D_Sprite>, x:Float, y:Float):Void{};
 
+	//public static function totallydoesshitffs(ptr:Ptr<C2D_Sprite>):Ptr<C2D_Sprite>{
+	//	return null;
+	//}
+
+
+	/*public extern static inline function C2D_CreateSprite():C2D_Sprite{
+		untyped __cpp__("return");
+		return null;
+	};*/
+
 }
+
 //C2D_SpriteSetPos(&sprites, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 
 //consoleInit(GFX_BOTTOM, NULL);
