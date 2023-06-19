@@ -108,6 +108,71 @@ enum C3D_ClearBits {
 	C3D_CLEAR_ALL;
 }
 
+extern class Buttons {
+	@:native("KEY_A")
+	public static var KEY_A:UInt32;
+
+	@:native("KEY_B")
+	public static var KEY_B:UInt32;
+
+	@:native("KEY_X")
+	public static var KEY_X:UInt32;
+
+	@:native("KEY_Y")
+	public static var KEY_Y:UInt32;
+
+	@:native("KEY_SELECT")
+	public static var KEY_SELECT:UInt32;
+
+	@:native("KEY_START")
+	public static var KEY_START:UInt32;
+
+	@:native("KEY_DRIGHT")
+	public static var KEY_DRIGHT:UInt32;
+
+	@:native("KEY_DLEFT")
+	public static var KEY_DLEFT:UInt32;
+
+	@:native("KEY_DUP")
+	public static var KEY_DUP:UInt32;
+
+	@:native("KEY_DDOWN")
+	public static var KEY_DDOWN:UInt32;
+
+	@:native("KEY_R")
+	public static var KEY_R:UInt32;
+
+	@:native("KEY_L")
+	public static var KEY_L:UInt32;
+
+	@:native("KEY_TOUCH")
+	public static var KEY_TOUCH:UInt32;
+
+	@:native("KEY_CSTICK_RIGHT")
+	public static var KEY_CSTICK_RIGHT:UInt32;
+
+	@:native("KEY_CSTICK_LEFT")
+	public static var KEY_CSTICK_LEFT:UInt32;
+
+	@:native("KEY_CSTICK_UP")
+	public static var KEY_CSTICK_UP:UInt32;
+
+	@:native("KEY_CSTICK_DOWN")
+	public static var KEY_CSTICK_DOWN:UInt32;
+}
+/*
+ char keysNames[32][32] = {
+		"KEY_A", "KEY_B", "KEY_SELECT", "KEY_START",
+		"KEY_DRIGHT", "KEY_DLEFT", "KEY_DUP", "KEY_DDOWN",
+		"KEY_R", "KEY_L", "KEY_X", "KEY_Y",
+		"", "", "KEY_ZL", "KEY_ZR",
+		"", "", "", "",
+		"KEY_TOUCH", "", "", "",
+		"KEY_CSTICK_RIGHT", "KEY_CSTICK_LEFT", "KEY_CSTICK_UP", "KEY_CSTICK_DOWN",
+		"KEY_CPAD_RIGHT", "KEY_CPAD_LEFT", "KEY_CPAD_UP", "KEY_CPAD_DOWN"
+	};
+*/
+
 
 //@:native("C2D_RenderTarget")
 //class C2DRenderTarget {}
@@ -218,10 +283,9 @@ class Nintendo{
 
 	@:native("C2D_SpriteFromSheet")
 	public static function C2D_SpriteFromSheet(sprites:Ptr<C2D_Sprite>, sheet:C2D_SpriteSheet, index:SizeT):Void{};
-	//C2D_SpriteFromImage C2D_Sprite *sprite, C2D_Image image
+
 	@:native("C2D_SpriteFromImage")
 	public static function C2D_SpriteFromImage(sprite:Ptr<C2D_Sprite>, image:C2D_Image):Void{};
-
 
 	@:native("C2D_DrawSprite")
 	public static function C2D_DrawSprite(sprites:Ptr<C2D_Sprite>):Void{};  
@@ -235,66 +299,15 @@ class Nintendo{
 	@:native("C2D_SpriteSetPos")
 	public static function C2D_SpriteSetPos(sheet:Ptr<C2D_Sprite>, x:Float, y:Float):Void{};
 
-	//public static function totallydoesshitffs(ptr:Ptr<C2D_Sprite>):Ptr<C2D_Sprite>{
-	//	return null;
-	//}
+	//has a key just been pressed that frame
+	@:native("hidKeysDown")
+	public static function hidKeysDown():UInt32{return 0;};
 
+	//is a key held
+	@:native("hidKeysHeld")
+	public static function hidKeysHeld():UInt32{return 0;};
 
-	/*public extern static inline function C2D_CreateSprite():C2D_Sprite{
-		untyped __cpp__("return");
-		return null;
-	};*/
-
+	//has a key gone up that frame
+	@:native("hidKeysUp")
+	public static function hidKeysUp():UInt32{return 0;};
 }
-
-//C2D_SpriteSetPos(&sprites, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
-
-//consoleInit(GFX_BOTTOM, NULL);
-/*
-int main()
-{
-	// Initialize graphics
-	gfxInitDefault();
-	C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
-
-	// Initialize the render target
-	C3D_RenderTarget* top = C3D_RenderTargetCreate(240, 400, GPU_RB_RGBA8, GPU_RB_DEPTH24_STENCIL8);
-	C3D_RenderTargetSetOutput(top, GFX_TOP, GFX_LEFT, DISPLAY_TRANSFER_FLAGS);
-	C3D_RenderTarget* bot = C3D_RenderTargetCreate(240, 320, GPU_RB_RGBA8, GPU_RB_DEPTH24_STENCIL8);
-	C3D_RenderTargetSetOutput(bot, GFX_BOTTOM, GFX_LEFT, DISPLAY_TRANSFER_FLAGS);
-
-	// Initialize the scene
-	sceneInit();
-
-	// Main loop
-	float count = 0.0f;
-	while (aptMainLoop())
-	{
-		hidScanInput();
-
-		// Respond to user input
-		u32 kDown = hidKeysDown();
-		if (kDown & KEY_START)
-			break; // break in order to return to hbmenu
-
-		// Render the scene
-		C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
-			C3D_RenderTargetClear(top, C3D_CLEAR_ALL, CLEAR_COLOR, 0);
-			C3D_FrameDrawOn(top);
-			sceneRender(count, true);
-			C3D_RenderTargetClear(bot, C3D_CLEAR_ALL, CLEAR_COLOR, 0);
-			C3D_FrameDrawOn(bot);
-			sceneRender(count, false);
-		C3D_FrameEnd(0);
-		count += 1/128.0f;
-	}
-
-	// Deinitialize the scene
-	sceneExit();
-
-	// Deinitialize graphics
-	C3D_Fini();
-	gfxExit();
-	return 0;
-}
-*/
