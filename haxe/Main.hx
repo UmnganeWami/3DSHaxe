@@ -1,7 +1,6 @@
 package;
 
 import cxx.Syntax;
-import cxx.num.Int32;
 import Nintendo.C2D_Sprite;
 import Nintendo.C2D_SpriteSheet;
 import cxx.num.UInt32;
@@ -10,7 +9,6 @@ import Nintendo.FrameBeginEnum;
 import Nintendo.GfxSide_t;
 import Nintendo.GfxScreen_t;
 import Nintendo.Buttons;
-import Nintendo.OggOpusFile;
 import cxx.Ptr;
 
 var height:Float = 240.0; //the height of both screens
