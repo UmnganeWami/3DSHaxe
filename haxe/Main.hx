@@ -11,28 +11,29 @@ import Nintendo.GfxScreen_t;
 import Nintendo.Buttons;
 import cxx.Ptr;
 
-var height:Float = 240.0; //the height of both screens
-var width:Float = 400.0; //the width of both screens
+var screenAreaHeight:Float = 240.0; //the height of both screens
+var screenAreaWidth:Float = 400.0; //the width of both screens
 function main(){
     untyped __include__("3ds.h");
     untyped __include__("citro2d.h"); 
     untyped __include__("citro3d.h");  
+
 	Nintendo.romfsInit();
 	Nintendo.gfxInitDefault();
 	Nintendo.C3D_Init(Nintendo.C3D_DEFAULT_CMDBUF_SIZE);
 	Nintendo.C2D_Init(Nintendo.C2D_DEFAULT_MAX_OBJECTS);
 	Nintendo.C2D_Prepare();
 
-	var bottomptr:Ptr<C3DRenderTarget> = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_BOTTOM, GfxSide_t.GFX_LEFT);
-	var topptr:Ptr<C3DRenderTarget> = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_TOP, GfxSide_t.GFX_LEFT);
-	var clearColor:UInt32 = Nintendo.C2D_Color32f(0.0, 0.0, 1.0, 1.0);
+	var bottomScreen:Ptr<C3DRenderTarget> = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_BOTTOM, GfxSide_t.GFX_LEFT);
+	var topScreen:Ptr<C3DRenderTarget> = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_TOP, GfxSide_t.GFX_LEFT);
+	var clearColor:UInt32 = Nintendo.C2D_Color32f(0.0, 0.0, 0.0, 1.0);
 
 	var sprsheet:C2D_SpriteSheet = Nintendo.C2D_SpriteSheetLoad("romfs:/gfx/test.t3x");
 
 
-	var spr:C2D_Sprite = Syntax.NoAssign;
-	var sprPtr:Ptr<C2D_Sprite> = Syntax.toPointer(spr);
-	Nintendo.C2D_SpriteFromSheet(sprPtr,sprsheet,0);
+	var sprite:C2D_Sprite = Syntax.NoAssign;
+	var spritePointer:Ptr<C2D_Sprite> = Syntax.toPointer(sprite);
+	Nintendo.C2D_SpriteFromSheet(spritePointer,sprsheet,0);
 
 	var x:Float = 0;
     while(Nintendo.aptMainLoop()){
@@ -52,19 +53,21 @@ function main(){
 			break;
 		}
 
-		Nintendo.C2D_SpriteSetPos(sprPtr, x, 0);
+		Nintendo.C2D_SpriteSetPos(spritePointer, x, 0);
 		
 		Nintendo.C3D_FrameBegin(FrameBeginFlag.C3D_FRAME_SYNCDRAW);
-		Nintendo.C2D_TargetClear(topptr, clearColor);
-		Nintendo.C2D_SceneBegin(topptr);
+		Nintendo.C2D_TargetClear(topScreen, clearColor);
+		Nintendo.C2D_SceneBegin(topScreen);
+
 		//drawTop(); 
-		Nintendo.C2D_DrawSprite(sprPtr);
+		Nintendo.C2D_DrawSprite(spritePointer);
 
 		Nintendo.C3D_FrameBegin(FrameBeginFlag.C3D_FRAME_SYNCDRAW);
-		Nintendo.C2D_TargetClear(bottomptr, clearColor);
-		Nintendo.C3D_FrameDrawOn(bottomptr);
+		Nintendo.C2D_TargetClear(bottomScreen, clearColor);
+		Nintendo.C3D_FrameDrawOn(bottomScreen);
+
 		//drawBottom();
-		Nintendo.C2D_DrawSprite(sprPtr);
+		Nintendo.C2D_DrawSprite(spritePointer);
 
 		Nintendo.C2D_Flush();
 		Nintendo.C3D_FrameEnd(0);
@@ -77,11 +80,11 @@ function main(){
 }
 
 function drawTop(){
-	Nintendo.C2D_DrawRectSolid(0.0, 0.0, 0.0, width, height, Nintendo.C2D_Color32f(0.0, 1.0, 0.0, 1.0)); 
+	Nintendo.C2D_DrawRectSolid(0.0, 0.0, 0.0, screenAreaWidth, screenAreaHeight, Nintendo.C2D_Color32f(0.0, 1.0, 0.0, 1.0)); 
 }
 
 function drawBottom(){
-	Nintendo.C2D_DrawRectSolid(0.0, 0.0, 0.0, width, height, Nintendo.C2D_Color32f(0.0, 1.0, 0.0, 1.0)); 
+	Nintendo.C2D_DrawRectSolid(0.0, 0.0, 0.0, screenAreaWidth, screenAreaHeight, Nintendo.C2D_Color32f(0.0, 1.0, 0.0, 1.0)); 
 }
 
 function checkButton(keysstuff:UInt32, key:UInt32):Bool{
