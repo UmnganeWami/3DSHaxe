@@ -43,9 +43,29 @@ extern class Tex3DS_SubTexture {
 	}
 }
 
+@:native("CWAV")
+extern class CWAV {}
+
+/**
+ typedef enum
+{
+    CWAV_ENV_DSP = 0, // DSP Service, only available for applications.
+    CWAV_ENV_CSND = 1 // CSND Service, only available for applets and 3GX plugins.
+} cwavEnvMode_t;
+ */
+
+enum CwavEnvMode_t {
+	@:native("CWAV_ENV_DSP")
+	CWAV_ENV_DSP;
+
+	@:native("CWAV_ENV_CSND")
+	CWAV_ENV_CSND;
+}
+
 enum GfxScreen_t {
 	@:native("GFX_TOP")
 	GFX_TOP;
+
 	@:native("GFX_BOTTOM")
 	GFX_BOTTOM;
 }
@@ -53,6 +73,7 @@ enum GfxScreen_t {
 enum GfxSide_t {
 	@:native("GFX_LEFT")
 	GFX_LEFT;
+
 	@:native("GFX_RIGHT")
 	GFX_RIGHT;
 }
@@ -147,31 +168,14 @@ extern class Buttons {
 	@:native("KEY_CSTICK_DOWN")
 	public static var KEY_CSTICK_DOWN:UInt32;
 }
-/*
- char keysNames[32][32] = {
-		"KEY_A", "KEY_B", "KEY_SELECT", "KEY_START",
-		"KEY_DRIGHT", "KEY_DLEFT", "KEY_DUP", "KEY_DDOWN",
-		"KEY_R", "KEY_L", "KEY_X", "KEY_Y",
-		"", "", "KEY_ZL", "KEY_ZR",
-		"", "", "", "",
-		"KEY_TOUCH", "", "", "",
-		"KEY_CSTICK_RIGHT", "KEY_CSTICK_LEFT", "KEY_CSTICK_UP", "KEY_CSTICK_DOWN",
-		"KEY_CPAD_RIGHT", "KEY_CPAD_LEFT", "KEY_CPAD_UP", "KEY_CPAD_DOWN"
-	};
-*/
-
-
-//@:native("C2D_RenderTarget")
-//class C2DRenderTarget {}
 
 @:native("C3D_RenderTarget")
 extern class C3DRenderTarget {}
 
-//gfx3dSide_t
-
 @:include("3ds.h")
 @:include("citro2d.h")
 @:include("citro3d.h") 
+@:include("cwav.h") 
 
 
 class Nintendo{
@@ -309,4 +313,23 @@ class Nintendo{
 
 	@:native("romfsExit")
 	public static function romfsExit():Void{};
+
+	@:native("cwavFileLoad")
+	public static function cwavFileLoad(wavPointer:Ptr<CWAV>, fileName:String, flags:UInt8):Void{};
+
+	@:native("cwavPlay")
+	public static function cwavPlay(wavPointer:Ptr<CWAV>, leftchannel:Int, rightchannel:Int):Void{};
+
+	@:native("cwavFileFree")
+	public static function cwavFileFree():Void{};
+
+	@:native("cwavUseEnvironment")
+	public static function cwavUseEnvironment(envmode:CwavEnvMode_t):Void{};
+
+	@:native("ndspInit")
+	public static function ndspInit():Void{};
 }
+
+// ndspInit();
+//cwavPlay(cwav, 0, 1);
+//cwavFileFree(std::get<1>(*it));
