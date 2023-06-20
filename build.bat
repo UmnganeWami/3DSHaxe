@@ -7,6 +7,7 @@ if exist export (
 )
 echo --------------------------
 echo Exporting haxe code.
+echo --------------------------
 haxe build.hxml
 if errorlevel 1 (
     echo UNSUCCESSFUL HAXE COMPILE!
@@ -24,7 +25,7 @@ if errorlevel 1 (
     echo --------------------------
 
     echo Compiling exported haxe code to 3ds rom!
-    echo
+    echo --------------------------
     cd export
     make
     cd ..
