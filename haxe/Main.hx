@@ -5,7 +5,7 @@ import Nintendo.C2D_Sprite;
 import Nintendo.C2D_SpriteSheet;
 import cxx.num.UInt32;
 import Nintendo.C3DRenderTarget;
-import Nintendo.FrameBeginEnum;
+import Nintendo.FrameBeginFlag;
 import Nintendo.GfxSide_t;
 import Nintendo.GfxScreen_t;
 import Nintendo.Buttons;
@@ -54,13 +54,13 @@ function main(){
 
 		Nintendo.C2D_SpriteSetPos(sprPtr, x, 0);
 		
-		Nintendo.C3D_FrameBegin(FrameBeginEnum.C3D_FRAME_SYNCDRAW);
+		Nintendo.C3D_FrameBegin(FrameBeginFlag.C3D_FRAME_SYNCDRAW);
 		Nintendo.C2D_TargetClear(topptr, clearColor);
 		Nintendo.C2D_SceneBegin(topptr);
 		//drawTop(); 
 		Nintendo.C2D_DrawSprite(sprPtr);
 
-		Nintendo.C3D_FrameBegin(FrameBeginEnum.C3D_FRAME_SYNCDRAW);
+		Nintendo.C3D_FrameBegin(FrameBeginFlag.C3D_FRAME_SYNCDRAW);
 		Nintendo.C2D_TargetClear(bottomptr, clearColor);
 		Nintendo.C3D_FrameDrawOn(bottomptr);
 		//drawBottom();

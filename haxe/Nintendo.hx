@@ -6,8 +6,6 @@ import cxx.num.UInt32;
 import cxx.num.UInt16;
 import cxx.num.UInt8;
 
-//@:include("citro2d.h")
-
 @:native("PrintConsole")
 extern class PrintConsole {}
 
@@ -44,20 +42,6 @@ extern class Tex3DS_SubTexture {
 		trace("lol");
 	}
 }
-//Tex3DS_SubTexture
-/*
-typedef struct Tex3DS_SubTexture
-{
-	u16   width;  ///< Sub-texture width (pixels)
-	u16   height; ///< Sub-texture height (pixels)
-	float left;   ///< Left u-coordinate
-	float top;    ///< Top v-coordinate
-	float right;  ///< Right u-coordinate
-	float bottom; ///< Bottom v-coordinate
-} Tex3DS_SubTexture;
-*/
-
-//Tex3DS_Texture
 
 enum GfxScreen_t {
 	@:native("GFX_TOP")
@@ -73,7 +57,7 @@ enum GfxSide_t {
 	GFX_RIGHT;
 }
 
-enum FrameBeginEnum {//idk what to call it lol
+enum FrameBeginFlag {
 	@:native("C3D_FRAME_SYNCDRAW")
 	C3D_FRAME_SYNCDRAW;
 	@:native("C3D_FRAME_NONBLOCK")
@@ -258,7 +242,7 @@ class Nintendo{
 	//public static function sceneRender(target:Ptr<C3DRenderTarget>):Void{};
 
 	@:native("C3D_FrameBegin")
-	public static function C3D_FrameBegin(flags:FrameBeginEnum):Void{}; 
+	public static function C3D_FrameBegin(flags:FrameBeginFlag):Void{}; 
 
 	@:native("C2D_SceneBegin")
 	public static function C2D_SceneBegin(target:Ptr<C3DRenderTarget>):Void{}; 
