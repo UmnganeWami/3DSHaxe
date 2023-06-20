@@ -6,4 +6,5 @@
 
 -D no-compilation
 -D cxx-no-null-warnings
+-D unsafe
 -D cpp-output=export

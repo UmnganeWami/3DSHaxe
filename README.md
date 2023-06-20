@@ -5,7 +5,8 @@ basicly lets you make 3ds homebrew using the haxe programming language!
 
 install devkitpro  
 install haxe  
-(get reflaxe.cpp (https://github.com/RobertBorghese/reflaxe.CPP))  
+install Reflaxe.cpp  
+(do so by running `haxelib git reflaxe.cpp https://github.com/RobertBorghese/reflaxe.CPP nightly`) (yes you need nightly!!)    
 
 # to compile
 

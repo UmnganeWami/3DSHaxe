@@ -29,6 +29,9 @@ extern class C2D_SpriteSheet {}
 @:native("C2D_Sprite")
 extern class C2D_Sprite {}
 
+@:native("OggOpusFile")
+extern class OggOpusFile {}
+
 @:native("Tex3DS_SubTexture")
 extern class Tex3DS_SubTexture {
 	public var width:UInt16;
@@ -184,7 +187,7 @@ extern class C3DRenderTarget {}
 
 @:include("3ds.h")
 @:include("citro2d.h")
-@:include("citro3d.h")
+@:include("citro3d.h") 
 
 
 class Nintendo{
@@ -310,4 +313,16 @@ class Nintendo{
 	//has a key gone up that frame
 	@:native("hidKeysUp")
 	public static function hidKeysUp():UInt32{return 0;};
+
+	@:native("C2D_SpriteSheetFree")
+	public static function C2D_SpriteSheetFree(sheet:C2D_SpriteSheet):Void{};
+
+	@:native("C2D_Fini")
+	public static function C2D_Fini():Void{};
+
+	@:native("C3D_Fini")
+	public static function C3D_Fini():Void{};
+
+	@:native("romfsExit")
+	public static function romfsExit():Void{};
 }

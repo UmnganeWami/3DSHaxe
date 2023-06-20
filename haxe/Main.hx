@@ -1,5 +1,6 @@
 package;
 
+import cxx.Syntax;
 import cxx.num.Int32;
 import Nintendo.C2D_Sprite;
 import Nintendo.C2D_SpriteSheet;
@@ -9,7 +10,7 @@ import Nintendo.FrameBeginEnum;
 import Nintendo.GfxSide_t;
 import Nintendo.GfxScreen_t;
 import Nintendo.Buttons;
-import Type;
+import Nintendo.OggOpusFile;
 import cxx.Ptr;
 
 var height:Float = 240.0; //the height of both screens
@@ -17,7 +18,7 @@ var width:Float = 400.0; //the width of both screens
 function main(){
     untyped __include__("3ds.h");
     untyped __include__("citro2d.h"); 
-    untyped __include__("citro3d.h"); 
+    untyped __include__("citro3d.h");  
 	Nintendo.romfsInit();
 	Nintendo.gfxInitDefault();
 	Nintendo.C3D_Init(Nintendo.C3D_DEFAULT_CMDBUF_SIZE);
@@ -29,12 +30,11 @@ function main(){
 	var clearColor:UInt32 = Nintendo.C2D_Color32f(0.0, 0.0, 1.0, 1.0);
 
 	var sprsheet:C2D_SpriteSheet = Nintendo.C2D_SpriteSheetLoad("romfs:/gfx/test.t3x");
-	var spr:Null<C2D_Sprite> = null;
-	untyped __cpp__("C2D_Sprite spr");
-	//we want to not need the untyped __cpp__ thingy, so we'll have to fix that up later :3
-	var sprPtr:Ptr<C2D_Sprite> = untyped __cpp__("&spr");
-	Nintendo.C2D_SpriteFromSheet(sprPtr,sprsheet,0);
 
+
+	var spr:C2D_Sprite = Syntax.NoAssign;
+	var sprPtr:Ptr<C2D_Sprite> = Syntax.toPointer(spr);
+	Nintendo.C2D_SpriteFromSheet(sprPtr,sprsheet,0);
 
 	var x:Float = 0;
     while(Nintendo.aptMainLoop()){
@@ -48,6 +48,10 @@ function main(){
 
 		if (checkButton(btnd, Buttons.KEY_DRIGHT)){
 			x += 1;
+		}
+
+		if (checkButton(btnd, Buttons.KEY_START)){
+			break;
 		}
 
 		Nintendo.C2D_SpriteSetPos(sprPtr, x, 0);
@@ -67,7 +71,11 @@ function main(){
 		Nintendo.C2D_Flush();
 		Nintendo.C3D_FrameEnd(0);
     }
+	Nintendo.C2D_SpriteSheetFree(sprsheet);
+	Nintendo.C2D_Fini();
+	Nintendo.C3D_Fini();
     Nintendo.gfxExit();
+	Nintendo.romfsExit();
 }
 
 function drawTop(){
