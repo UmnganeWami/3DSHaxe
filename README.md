@@ -12,4 +12,3 @@ install Reflaxe.cpp
 # to compile
 
 run the build.bat  
-(if you want to do a clean build, run cleanbuild.bat, it basicly just deletes the export folder then runs build.bat)
