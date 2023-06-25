@@ -315,7 +315,7 @@ class Nintendo{
 	public static function romfsExit():Void{};
 
 	@:native("cwavFileLoad")
-	public static function cwavFileLoad(wavPointer:Ptr<CWAV>, fileName:String, flags:UInt8):Void{};
+	public static function cwavFileLoad(wavPointer:Ptr<CWAV>, fileName:String, flags:Int):Void{};
 
 	@:native("cwavPlay")
 	public static function cwavPlay(wavPointer:Ptr<CWAV>, leftchannel:Int, rightchannel:Int):Void{};
@@ -328,8 +328,14 @@ class Nintendo{
 
 	@:native("ndspInit")
 	public static function ndspInit():Void{};
+
+	@:native("ncsndInit")
+	public static function ncsndInit(doAptHook:Bool):Void{};
+
+	//@:native("cwavPlayAsDirectSound")
+	//public static function cwavPlayAsDirectSound(wavPointer:Ptr<CWAV>, leftchannel:Int, rightchannel:Int, directSoundChannel:Int, directSoundPriority:Int, ncsndDirectSoundModifier):Void{};
 }
 
-// ndspInit();
-//cwavPlay(cwav, 0, 1);
+//cwavPlayAsDirectSound(cwav, 0, 1, 0, 0, &dirSound.soundModifiers);
+//u32 directSoundChannel, u32 directSoundPriority, ncsndDirectSoundModifiers* soundModifiers
 //cwavFileFree(std::get<1>(*it));

@@ -19,7 +19,7 @@ function main(){
     untyped __include__("3ds.h");
     untyped __include__("citro2d.h"); 
     untyped __include__("citro3d.h");  
-    untyped __include__("cwav.h");  
+   // untyped __include__("cwav.h");  
 
 	Nintendo.romfsInit();
 	Nintendo.gfxInitDefault();
@@ -27,8 +27,8 @@ function main(){
 	Nintendo.C2D_Init(Nintendo.C2D_DEFAULT_MAX_OBJECTS);
 	Nintendo.C2D_Prepare();
 
-	Nintendo.cwavUseEnvironment( CwavEnvMode_t.CWAV_ENV_DSP );
-	Nintendo.ndspInit();
+	//Nintendo.cwavUseEnvironment( CwavEnvMode_t.CWAV_ENV_DSP );
+	//Nintendo.ndspInit(); //ncsndInit(true);
 
 	var bottomScreen:Ptr<C3DRenderTarget> = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_BOTTOM, GfxSide_t.GFX_LEFT);
 	var topScreen:Ptr<C3DRenderTarget> = Nintendo.C2D_CreateScreenTarget(GfxScreen_t.GFX_TOP, GfxSide_t.GFX_LEFT);
@@ -47,9 +47,10 @@ function main(){
     while(Nintendo.aptMainLoop()){
 		Nintendo.gspWaitForVBlank();
 		Nintendo.hidScanInput();
+		//Nintendo.cwavPlay(cwavPointer, 0, 1);
 		//cwavPlay(cwav, 0, 1);
-		//Nintendo.cwavPlay(cwavPointer, 0, -1);
 		var btnd:UInt32 = Nintendo.hidKeysHeld();
+		var btnp:UInt32 = Nintendo.hidKeysDown();
 		if (checkButton(btnd, Buttons.KEY_DLEFT)){
 			x -= 1;
 		}
@@ -58,7 +59,7 @@ function main(){
 			x += 1;
 		}
 
-		if (checkButton(btnd, Buttons.KEY_START)){
+		if (checkButton(btnp, Buttons.KEY_START)){
 			break;
 		}
 
