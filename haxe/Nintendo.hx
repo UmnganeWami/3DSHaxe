@@ -332,6 +332,12 @@ class Nintendo{
 	@:native("ncsndInit")
 	public static function ncsndInit(doAptHook:Bool):Void{};
 
+	@:native("cwavGetEnvironmentPlayingChannels")
+	public static function cwavGetEnvironmentPlayingChannels():UInt32{return 0;};
+
+	@:native("consoleClear")
+	public static function consoleClear():Void{};
+
 	//@:native("cwavPlayAsDirectSound")
 	//public static function cwavPlayAsDirectSound(wavPointer:Ptr<CWAV>, leftchannel:Int, rightchannel:Int, directSoundChannel:Int, directSoundPriority:Int, ncsndDirectSoundModifier):Void{};
 }

@@ -1,6 +1,5 @@
 # 3DSHaxe
 lets you make 3ds homebrew using the haxe programming language!  
-(audio doesnt work and im unsure if i'll be able to get it to work)  
 
 # to setup:
 
