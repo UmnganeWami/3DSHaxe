@@ -44,10 +44,6 @@ function main(){
 	var cwavPointer:Ptr<CWAV> = Syntax.toPointer(cwav);
 	Nintendo.cwavFileLoad(cwavPointer, "romfs:/beep_dsp_adpcm.bcwav", 1);
 	Nintendo.printf("meow?");
-	untyped __cpp__("if (cwavPointer->loadStatus == CWAV_SUCCESS)
-	{
-		printf(\"FUCKKKK\");
-	}");
 
 	var x:Float = 0;
     while(Nintendo.aptMainLoop()){
